@@ -17,7 +17,7 @@ const credentials = {
 
 // Your Express routes and middleware here
 app.get('/', (req, res) => {
-    res.type('html').send(html)
+    res.type('html').send(html);
     
     res.send('Express server is running with HTTPS!');
 });
