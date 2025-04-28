@@ -15,13 +15,33 @@ const port = process.env.PORT || 3001;
 */
 
 // Your Express routes and middleware here
-app.get('/.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
-    res.sendFile('/.well-known/appspecific/com.tesla.3p.public-key.pem');
-});
+//app.get('/.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
+//    res.sendFile('/.well-known/appspecific/com.tesla.3p.public-key.pem');
+//});
+//
+//app.get('/.well-known/appspecific/test.html', (req, res) => {
+//    res.sendFile('/.well-known/appspecific/test.html');
+//});
 
-app.get('/.well-known/appspecific/test.html', (req, res) => {
-    res.sendFile('/.well-known/appspecific/test.html');
-});
+app.get('/file/:name', (req, res, next) => {
+  const options = {
+    root: path.join(__dirname, 'public'),
+    dotfiles: 'allow',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
+    }
+  }
+
+  const fileName = req.params.name
+  res.sendFile(fileName, options, (err) => {
+    if (err) {
+      next(err)
+    } else {
+      console.log('Sent:', fileName)
+    }
+  })
+})
 
 const server = app.listen(port, function() {
     console.log("Listening on " + port);
