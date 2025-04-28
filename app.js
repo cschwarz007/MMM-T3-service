@@ -15,15 +15,16 @@ const port = process.env.PORT || 3001;
 */
 
 // Your Express routes and middleware here
-app.get('/', (req, res) => {
-    res.send('Express server is running!');
+app.get('.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
+    res.send('.well-known/appspecific/com.tesla.3p.public-key.pem');
 });
 
-app.use(express.static('.well-known/appspecific'));
-
+app.get('.well-known/appspecific/test.html', (req, res) => {
+    res.send('.well-known/appspecific/test.html');
+});
 
 const server = app.listen(port, function() {
-    console.log("Listening on ${port}");
+    console.log("Listening on " + port);
 });
 
 server.keepAliveTimeout = 120 * 1000;
