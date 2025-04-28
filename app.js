@@ -25,7 +25,7 @@ const port = process.env.PORT || 3001;
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
   const options = {
-    root: req.path,
+    root: "/",
     dotfiles: 'allow',
     headers: {
       'x-timestamp': Date.now(),
@@ -37,7 +37,7 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
       console.log("req path: " + req.path);
       console.log("name: " + req.params.name);
 
-  const fileName = req.params.name;
+  const fileName = req.path;
   
   res.sendFile(fileName, options, (err) => {
     if (err) {
