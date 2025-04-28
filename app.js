@@ -25,7 +25,7 @@ const port = process.env.PORT || 3001;
 
 app.get('/file/:name', (req, res, next) => {
   const options = {
-    root: path.join(__dirname, 'public'),
+    root: req.path,
     dotfiles: 'allow',
     headers: {
       'x-timestamp': Date.now(),
@@ -33,7 +33,11 @@ app.get('/file/:name', (req, res, next) => {
     }
   }
 
-  const fileName = req.params.name
+
+      console.log(options.root, req.path, req.params.name);
+
+  const fileName = req.params.name;
+  
   res.sendFile(fileName, options, (err) => {
     if (err) {
       next(err)
