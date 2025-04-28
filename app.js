@@ -23,7 +23,7 @@ const port = process.env.PORT || 3001;
 //    res.sendFile('/.well-known/appspecific/test.html');
 //});
 
-app.get('/file/:name', (req, res, next) => {
+app.get('/.well-known/appspecific/:name', (req, res, next) => {
   const options = {
     root: req.path,
     dotfiles: 'allow',
@@ -33,8 +33,9 @@ app.get('/file/:name', (req, res, next) => {
     }
   }
 
-
-      console.log(options.root, req.path, req.params.name);
+      console.log("root: " + options.root);
+      console.log("req path: " + req.path);
+      console.log("name: " + req.params.name);
 
   const fileName = req.params.name;
   
