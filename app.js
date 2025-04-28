@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 app.use(express.static('.well-known/appspecific'));
 
 
-app.listen(3000, function() {
-    console.log("Listening on 3000");
+const server = app.listen(port, function() {
+    console.log("Listening on ${port}");
 });
 
 server.keepAliveTimeout = 120 * 1000;
