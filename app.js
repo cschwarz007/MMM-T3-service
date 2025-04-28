@@ -5,8 +5,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 
-//const publickey = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/com.tesla.3p.public-key.pem'), 'utf8');
-//const certificate = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/client-certificate.pem'), 'utf8');
+//const publickey = fs.readFileSync(path.join(__dirname, '/.well-known/appspecific/com.tesla.3p.public-key.pem'), 'utf8');
+//const certificate = fs.readFileSync(path.join(__dirname, '/.well-known/appspecific/client-certificate.pem'), 'utf8');
 
 /*const credentials = {
   key: publickey,
@@ -15,12 +15,12 @@ const port = process.env.PORT || 3001;
 */
 
 // Your Express routes and middleware here
-app.get('.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
-    res.send('.well-known/appspecific/com.tesla.3p.public-key.pem');
+app.get('/.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
+    res.send('/.well-known/appspecific/com.tesla.3p.public-key.pem');
 });
 
-app.get('.well-known/appspecific/test.html', (req, res) => {
-    res.send('.well-known/appspecific/test.html');
+app.get('/.well-known/appspecific/test.html', (req, res) => {
+    res.send('/.well-known/appspecific/test.html');
 });
 
 const server = app.listen(port, function() {
