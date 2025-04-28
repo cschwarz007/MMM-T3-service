@@ -37,7 +37,7 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
       console.log("req path: " + req.path);
       console.log("name: " + req.params.name);
 
-  const fileName = req.path;
+  const fileName = "." + req.path;
   
   res.sendFile(fileName, options, (err) => {
     if (err) {
