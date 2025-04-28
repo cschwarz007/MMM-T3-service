@@ -1,27 +1,29 @@
 const express = require("express");
+//const fs = require('fs');
+//const https = require('https');
+//const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
-const fs = require('fs');
-const https = require('https');
-const path = require('path');
 
-const publickey = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/com.tesla.3p.public-key.pem'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/client-certificate.pem'), 'utf8');
+//const publickey = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/com.tesla.3p.public-key.pem'), 'utf8');
+//const certificate = fs.readFileSync(path.join(__dirname, '.well-known/appspecific/client-certificate.pem'), 'utf8');
 
-const credentials = {
+/*const credentials = {
   key: publickey,
   cert: certificate,
 };
+*/
 
 // Your Express routes and middleware here
 app.get('/', (req, res) => {
-    res.send('Express server is running with HTTPS!');
+    res.send('Express server is running!');
 });
 
-const httpsServer = https.createServer(credentials, app);
+app.use(express.static('.well-known/appspecific'));
 
-httpsServer.listen(3000, () => {
-  console.log('Server is listening on port 3000');
+
+app.listen(3000, function() {
+    console.log("Listening on 3000");
 });
 
 server.keepAliveTimeout = 120 * 1000;
