@@ -16,11 +16,11 @@ const port = process.env.PORT || 3001;
 
 // Your Express routes and middleware here
 app.get('/.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
-    res.send('/.well-known/appspecific/com.tesla.3p.public-key.pem');
+    res.sendFile('/.well-known/appspecific/com.tesla.3p.public-key.pem');
 });
 
 app.get('/.well-known/appspecific/test.html', (req, res) => {
-    res.send('/.well-known/appspecific/test.html');
+    res.sendFile('/.well-known/appspecific/test.html');
 });
 
 const server = app.listen(port, function() {
