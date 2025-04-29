@@ -7,7 +7,6 @@ const port = process.env.PORT || 3001;
 
 //Tesla specific
 const url_auth_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/authorize");
-
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
         root: "./",
@@ -35,7 +34,7 @@ app.get('/auth', (req, res) => {
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
         'prompt': 'login',
-        'redirect_uri': 'https://mmm-tesla3.onrender.com/oauth/',
+        'redirect_uri': 'https://mmm-t3-service.onrender.com/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
     };
@@ -45,9 +44,9 @@ app.get('/auth', (req, res) => {
     res.redirect(url_auth_endpoint + "?" + searchparams.toString());
 })
 
-app.get('/oauth', (req, res, next) => {
+app.get('/auth/callback', (req, res, next) => {
   
-    console.log("callback magic?");
+    res.send(req.body);
 });
 
 const server = app.listen(port, function() {
