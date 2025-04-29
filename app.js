@@ -5,48 +5,50 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 
-//const publickey = fs.readFileSync(path.join(__dirname, '/.well-known/appspecific/com.tesla.3p.public-key.pem'), 'utf8');
-//const certificate = fs.readFileSync(path.join(__dirname, '/.well-known/appspecific/client-certificate.pem'), 'utf8');
-
-/*const credentials = {
-  key: publickey,
-  cert: certificate,
-};
-*/
-
-// Your Express routes and middleware here
-//app.get('/.well-known/appspecific/com.tesla.3p.public-key.pem', (req, res) => {
-//    res.sendFile('/.well-known/appspecific/com.tesla.3p.public-key.pem');
-//});
-//
-//app.get('/.well-known/appspecific/test.html', (req, res) => {
-//    res.sendFile('/.well-known/appspecific/test.html');
-//});
+//Tesla specific
+const url_auth_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/authorize");
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
-  const options = {
-    root: "./",
-    dotfiles: 'allow',
-    headers: {
-      'x-timestamp': Date.now(),
-      'x-sent': true
+    const options = {
+        root: "./",
+        dotfiles: 'allow',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
     }
-  }
 
-      console.log("root: " + options.root);
-      console.log("req path: " + req.path);
-      console.log("name: " + req.params.name);
+    const fileName = req.path;
 
-  const fileName = req.path;
-  
-  res.sendFile(fileName, options, (err) => {
-    if (err) {
-      next(err)
-    } else {
-      console.log('Sent:', fileName)
-    }
-  })
+    res.sendFile(fileName, options, (err) => {
+        if (err) {
+            next(err)
+        } else {
+            console.log('Sent:', fileName)
+        }
+    })
 })
+
+app.get('/auth', (req, res) => {
+    const paramsObj = {
+        'client_id': 'a1b5658c-14f8-4685-9cee-5cb597476b62',
+        'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
+        'locale': 'en-US',
+        'prompt': 'login',
+        'redirect_uri': 'https://mmm-tesla3.onrender.com/oauth/',
+        'response_type': 'code',
+        'state': (Math.floor(Math.random() * 10))
+    };
+  
+    const searchparams = new URLSearchParams(paramsObj);
+    
+    res.redirect(url_auth_endpoint + "?" + searchparams.toString());
+})
+
+app.get('/oauth', (req, res, next) => {
+  
+    console.log("callback magic?");
+});
 
 const server = app.listen(port, function() {
     console.log("Listening on " + port);
