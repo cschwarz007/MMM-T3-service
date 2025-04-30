@@ -51,7 +51,7 @@ app.get('/auth/callback', (req, res, next) => {
     const paramsObj = {
         'grant_type': 'authorization_code',
         'client_id': 'a1b5658c-14f8-4685-9cee-5cb597476b62',
-        'client_secret': encodeURIComponent(process.env.CLIENT_SECRET),
+        'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
         'redirect_uri': 'https://mmm-t3-service.onrender.com/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
@@ -60,7 +60,7 @@ app.get('/auth/callback', (req, res, next) => {
     const searchparams = new URLSearchParams(paramsObj);
     
     //res.send(url_token_endpoint + "?" + searchparams.toString());
-    res.redirect(url_token_endpoint + "?" + searchparams.toString());
+    res.redirect(encodeURI(url_token_endpoint + "?" + searchparams.toString()));
 });
 
 app.get('/auth/token', (req, res, next) => {
