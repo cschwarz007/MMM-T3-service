@@ -59,8 +59,8 @@ app.get('/auth/callback', (req, res, next) => {
     
     const searchparams = new URLSearchParams(paramsObj);
     
-    //res.send(url_token_endpoint + "?" + searchparams.toString());
-    res.redirect(url_token_endpoint + "?" + searchparams.toString());
+    res.send(url_token_endpoint + "?" + searchparams.toString());
+    //res.redirect(url_token_endpoint + "?" + searchparams.toString());
 });
 
 app.get('/auth/token', (req, res, next) => {
