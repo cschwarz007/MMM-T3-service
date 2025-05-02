@@ -40,7 +40,7 @@ app.get('/auth', (req, res) => {
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
-    };
+    });
   
     //const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth_endpoint); // + "?" + searchparams.toString());
