@@ -57,9 +57,9 @@ app.get('/auth/callback', (req, res, next) => {
         'redirect_uri': 'https://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
-    console.log(url_token_endpoint + "?" + searchparams.toString());
+    console.log('sec:' + res.get('client_secret'));
     
-    res.redirect(url_token_endpoint + "?" + searchparams.toString());
+    res.redirect(url_token_endpoint);
 });
 
 app.get('/auth/token', (req, res, next) => {
