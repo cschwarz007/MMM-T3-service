@@ -58,7 +58,7 @@ app.get('/auth/callback', (req, res, next) => {
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
     
-    res.redirect(url_token_endpoint);
+    res.redirect(url_token_endpoint + "?" + searchparams.toString());
 });
 
 app.get('/auth/token', (req, res, next) => {
