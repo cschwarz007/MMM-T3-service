@@ -29,7 +29,10 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
 })
 
 app.get('/auth', (req, res) => {
-    const paramsObj = {
+    //const paramsObj = {
+    //responsing with headers avoids encoding annoying CLIENT_SECRET chars
+    res.set({
+        'Content-Type': 'text/plain',
         'client_id': process.env.CLIENT_ID,
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
@@ -39,8 +42,8 @@ app.get('/auth', (req, res) => {
         'state': (Math.floor(Math.random() * 10))
     };
   
-    const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_auth_endpoint + "?" + searchparams.toString());
+    //const searchparams = new URLSearchParams(paramsObj);
+    res.redirect(url_auth_endpoint); // + "?" + searchparams.toString());
 })
 
 app.get('/auth/callback', (req, res, next) => {
