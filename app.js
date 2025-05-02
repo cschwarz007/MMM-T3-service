@@ -30,11 +30,11 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
 
 app.get('/auth', (req, res) => {
     const paramsObj = {
-        'client_id': 'a1b5658c-14f8-4685-9cee-5cb597476b62',
+        'client_id': process.env.CLIENT_ID,
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
         'prompt': 'login',
-        'redirect_uri': 'https://mmm-t3-service.onrender.com/auth/callback',
+        'redirect_uri': req.protocol + '://' + req.get('host') + '/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
     };
@@ -50,10 +50,10 @@ app.get('/auth/callback', (req, res, next) => {
     res.set({
         'Content-Type': 'text/plain',
         'grant_type': 'authorization_code',
-        'client_id': 'a1b5658c-14f8-4685-9cee-5cb597476b62',
+        'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
-        'redirect_uri': 'https://mmm-t3-service.onrender.com/auth/token',
+        'redirect_uri': req.protocol + '://' + req.get('host') + /auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
     
