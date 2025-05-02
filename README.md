@@ -32,7 +32,7 @@ References:
     * `openssl ec -in private-key.pem -pubout -out public-key.pem`
     * replaces the `mmm-t3-service pem` in your forked repo under `.well-known/appspecific/com.tesla.3p.public-key.pem`
     * ensure your repo is updated on the server where your app resides so this key is avaiable for the register step next.
-  * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: use the links in the directions:
+  * **[Tesla Getting Started Step 4](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: use the links in the directions:
     * PARTNER auth token link: run curl using their example (heavy editting) in the command line. They will respond in the terminal with your registration auth token which will be used next.
     * REGISTER endpoint step: run one of the multiple linked options. From what I can tell, you dont need the response from this.
 <br>
