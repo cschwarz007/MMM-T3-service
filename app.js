@@ -49,7 +49,7 @@ app.get('/auth/callback', (req, res, next) => {
     
     //responsing with headers avoids encoding annoying CLIENT_SECRET chars
     res.set({
-        'Content-Type': 'text/plain; charset=utf-8'',
+        'Content-Type': 'text/plain; charset=utf-8',
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
