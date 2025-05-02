@@ -53,7 +53,7 @@ app.get('/auth/callback', (req, res, next) => {
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
-        'redirect_uri': req.protocol + '://' + req.get('host') + /auth/token',
+        'redirect_uri': req.protocol + '://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
     
