@@ -28,9 +28,9 @@ References:
     * Scopes: vehicle info, location, commands, charging
   * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: after you are done outlining your app in Tesla dev, copy your client ID and secret from the [Tesla Dev dashboard](https://developer.tesla.com/dashboard) into the environment variables on render.com.
   * **[Tesla Getting Started Step 3](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: this makes your public key
-    * openssl ecparam -name prime256v1 -genkey -noout -out private-key.pem
-    * openssl ec -in private-key.pem -pubout -out public-key.pem
-    * replaces the mmm-t3-service pem in your forked repo under .well-known/appspecific/com.tesla.3p.public-key.pem
+    * `openssl ecparam -name prime256v1 -genkey -noout -out private-key.pem`
+    * `openssl ec -in private-key.pem -pubout -out public-key.pem`
+    * replaces the `mmm-t3-service pem` in your forked repo under `.well-known/appspecific/com.tesla.3p.public-key.pem`
     * ensure your repo is updated on the server where your app resides so this key is avaiable for the register step next.
   * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: use the links in the directions:
     * PARTNER auth token link: run curl using their example (heavy editting) in the command line. They will respond in the terminal with your registration auth token which will be used next.
