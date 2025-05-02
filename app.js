@@ -49,7 +49,7 @@ app.get('/auth/callback', (req, res, next) => {
     
     //responsing with headers avoids encoding annoying CLIENT_SECRET chars
     res.set({
-        'Content-Type': 'text/plain; charset=utf-8',
+        'content-type': 'application/x-www-form-urlencoded',
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
@@ -58,6 +58,8 @@ app.get('/auth/callback', (req, res, next) => {
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
     console.log('sec:' + res.get('client_secret'));
+    console.log('id:' + res.get('client_id'));
+    console.log('grant:' + res.get('grant_type'));
     
     res.redirect(url_token_endpoint);
 });
