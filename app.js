@@ -34,7 +34,7 @@ app.get('/auth', (req, res) => {
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
         'prompt': 'login',
-        'redirect_uri': req.protocol + '://' + req.get('host') + '/auth/callback',
+        'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
     };
@@ -53,7 +53,7 @@ app.get('/auth/callback', (req, res, next) => {
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
-        'redirect_uri': req.protocol + '://' + req.get('host') + '/auth/token',
+        'redirect_uri': 'https://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     });
     
