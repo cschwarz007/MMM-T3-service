@@ -48,21 +48,17 @@ app.get('/auth/callback', (req, res, next) => {
     callback_code=req.query.code.toString() || next(err);
     
     //responsing with headers avoids encoding annoying CLIENT_SECRET chars
-    //res.set({
-    const paramsObj = {
-        'Content-Type': 'text/plain',
+    res.set({
+        'Content-Type': 'text/plain; charset=utf-8'',
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
-        'client_secret': process.env.CLIENT_SECRET.replace(/\*/g,'%2A'),
+        'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
-    };
-  
-    const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_token_endpoint + "?" + searchparams.toString());
+    });
     
-    //res.redirect(url_token_endpoint);
+    res.redirect(url_token_endpoint);
 });
 
 app.get('/auth/token', (req, res, next) => {
