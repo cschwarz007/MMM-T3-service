@@ -31,7 +31,7 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
 app.get('/auth', (req, res) => {
     //Tesla requires this to be query
     const paramsObj = {
-        'client_id': process.env.CLIENT_ID.replace(/\*/g,'%2A'),
+        'client_id': process.env.CLIENT_ID,
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
         'prompt': 'login',
@@ -48,17 +48,21 @@ app.get('/auth/callback', (req, res, next) => {
     callback_code=req.query.code.toString() || next(err);
     
     //responsing with headers avoids encoding annoying CLIENT_SECRET chars
-    res.set({
+    //res.set({
+    const paramsObj = {
         'Content-Type': 'text/plain',
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
-        'client_secret': process.env.CLIENT_SECRET,
+        'client_secret': process.env.CLIENT_SECRET.replace(/\*/g,'%2A'),
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
-    });
+    };
+  
+    const searchparams = new URLSearchParams(paramsObj);
+    res.redirect(url_token_endpoint + "?" + searchparams.toString());
     
-    res.redirect(url_token_endpoint);
+    //res.redirect(url_token_endpoint);
 });
 
 app.get('/auth/token', (req, res, next) => {
