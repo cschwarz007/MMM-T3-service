@@ -29,21 +29,19 @@ app.get('/.well-known/appspecific/:name', (req, res, next) => {
 })
 
 app.get('/auth', (req, res) => {
-    //const paramsObj = {
-    //responsing with headers avoids encoding annoying CLIENT_SECRET chars
-    res.set({
-        'Content-Type': 'text/plain',
-        'client_id': process.env.CLIENT_ID,
+    //Tesla requires this to be query
+    const paramsObj = {
+        'client_id': process.env.CLIENT_ID.replace(/\*/g,'%2A'),
         'scope': 'openid vehicle_device_data vehicle_cmds offline_access',
         'locale': 'en-US',
         'prompt': 'login',
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
-    });
+    };
   
-    //const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_auth_endpoint); // + "?" + searchparams.toString());
+    const searchparams = new URLSearchParams(paramsObj);
+    res.redirect(url_auth_endpoint + "?" + searchparams.toString());
 })
 
 app.get('/auth/callback', (req, res, next) => {
