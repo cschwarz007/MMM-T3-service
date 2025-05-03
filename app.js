@@ -57,6 +57,7 @@ app.get('/auth/callback', (req, res, next) => {
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     };
     
+    const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_token_endpoint + "?" + searchparams.toString().replace("*","%2A"));
 });
 
