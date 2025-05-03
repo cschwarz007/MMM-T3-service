@@ -57,11 +57,7 @@ app.get('/auth/callback', (req, res, next) => {
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
     };
     
-    console.log('sec:' + res.get('client_secret'));
-    console.log('id:' + res.get('client_id'));
-    console.log('grant:' + res.get('grant_type'));
-    
-    res.redirect(url_token_endpoint + "?" + searchparams.toString().replace("*","%2A");
+    res.redirect(url_token_endpoint + "?" + searchparams.toString().replace("*","%2A"));
 });
 
 app.get('/auth/token', (req, res, next) => {
@@ -72,6 +68,10 @@ app.get('/auth/token', (req, res, next) => {
     res.send(req.body + "\n\n" + 
              "refresh_token: " + refresh_token + "\n" + 
              "access_token: " + access_token );
+});
+
+app.get('/',(req,res)) => {
+    res.send(html);
 });
 
 const server = app.listen(port, function() {
@@ -85,11 +85,11 @@ const html = `
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello from Render!</title>
+    <title>Hey Dane!</title>
   </head>
   <body>
     <section>
-      Hello from Render!
+      Totally functional web page, nothing to see here...
     </section>
   </body>
 </html>
