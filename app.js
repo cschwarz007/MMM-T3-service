@@ -47,18 +47,54 @@ app.get('/auth', (req, res) => {
 app.get('/auth/callback', (req, res, next) => {
     callback_code=req.query.code.toString() || next(err);
     
-    const paramsObj = {
-        'content-type': 'application/x-www-form-urlencoded',
+    
+    
+    
+//   var request = require('request');
+//   var options = {
+//     'method': 'POST',
+//     'url': 'https://auth.tesla.com/oauth2/v3/token',
+//     'headers': {
+//       'Content-Type': 'application/x-www-form-urlencoded'
+//     },
+//     form: {
+//       'grant_type': 'authorization_code',
+//       'client_id': '{{CLIENT_ID}}',
+//       'client_secret': '{{CLIENT_SECRET}}',
+//       'audience': '{{FLEET_API_URL}}',
+//       'scope': '{{SCOPES}}',
+//       'code': '{{CALLBACK_CODE}}',
+//       'redirect_uri': '{{REDIRECT_URI}}'
+//     }
+//   };
+//   request(options, function (error, response) {
+//     if (error) throw new Error(error);
+//     console.log(response.body);
+//   });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    res.set({
+        'content-type': 'text/plain',
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/token',
         'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
-    };
+    });
     
-    const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_token_endpoint + "?" + searchparams.toString().replace("*","%2A"));
+    res.redirect(url_token_endpoint);
 });
 
 app.get('/auth/token', (req, res, next) => {
