@@ -71,9 +71,9 @@ app.get('/auth/token', (req, res, next) => {
              "access_token: " + access_token );
 });
 
-app.get('/',(req,res) => {
-    res.send(html);
-});
+//app.get('/',(req,res) => {
+//    res.send(html);
+//});
 
 const server = app.listen(port, function() {
     console.log("Listening on " + port);
