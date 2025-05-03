@@ -6,6 +6,7 @@ const port = process.env.PORT || 3001;
 //Tesla specific
 const url_auth_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/authorize");
 const url_token_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/token");
+const url_data_endpoint = new URL("https://fleet-api.prd.na.vn.cloud.tesla.com");
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
@@ -58,7 +59,7 @@ app.get('/auth/callback', (req, res, next) => {
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
-        'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com',
+        'audience': url_data_endpoint,
 //        'scope': '{{SCOPES}}',
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/token'
