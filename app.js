@@ -50,7 +50,7 @@ app.get('/auth/callback', (req, res, next) => {
     var request = require('request');
     var options = {
       'method': 'POST',
-      'url': 'https://auth.tesla.com/oauth2/v3/token',
+      'url': url_token_endpoint,
       'headers': {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
