@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const port = process.env.PORT || 3001;
+const https = require("https");
 
 //Tesla specific
-const url_auth_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/authorize");
-const url_token_endpoint = new URL("https://fleet-auth.prd.vn.cloud.tesla.com/oauth2/v3/token");
-const url_data_endpoint = new URL("https://fleet-api.prd.na.vn.cloud.tesla.com");
+const url_auth = "https://fleet-auth.prd.vn.cloud.tesla.com";
+const url_data = "https://fleet-api.prd.na.vn.cloud.tesla.com";
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
@@ -42,48 +42,23 @@ app.get('/auth', (req, res) => {
     };
   
     const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_auth_endpoint + "?" + searchparams.toString());
+    res.redirect(url_auth + '/oauth2/v3/authorize' + "?" + searchparams.toString());
 })
 
-app.get('/auth/callback', (req, res, next) => {
-    callback_code=req.query.code.toString() || next(err);
-
-    var request = require('request');
-    var options = {
-      'method': 'POST',
-      'url': url_token_endpoint,
-      'headers': {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      form: {
-        'grant_type': 'authorization_code',
-        'client_id': process.env.CLIENT_ID,
-        'client_secret': process.env.CLIENT_SECRET,
-        'audience': url_data_endpoint,
-//        'scope': '{{SCOPES}}',
-        'code': callback_code,
-        'redirect_uri': 'https://' + req.get('host') + '/auth/token'
-      }
-    };
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      console.log(response.body);
-    });
+app.get('/auth/callback', (req, res) => {
+    callback_code=req.query.code.toString();
     
+    var urlencoded = new URLSearchParams();
+    urlencoded.append('grant_type', 'authorization_code');
+    urlencoded.append('client_id', process.env.CLIENT_ID);
+    urlencoded.append('client_secret', process.env.CLIENT_SECRET);
+    urlencoded.append('code', callback_code);
+    urlencoded.append('redirect_uri', 'https://' + 'mmm-t3-service.onrender.com' /*+ req.get('host')*/ + '/auth/token');
+    urlencoded.append('audience', url_data);
     
+    const searchparams = new URLSearchParams(urlencoded);
+    res.redirect(url_auth + '/oauth2/v3/token' + "?" + searchparams.toString().replace("\*","%2A"));
     
-    
-//    res.set({
-//        'content-type': 'text/plain',
-//        'grant_type': 'authorization_code',
-//        'client_id': process.env.CLIENT_ID,
-//        'client_secret': process.env.CLIENT_SECRET,
-//        'code': callback_code,
-//        'redirect_uri': 'https://' + req.get('host') + '/auth/token',
-//        'audience': 'https://fleet-api.prd.na.vn.cloud.tesla.com'
-//    });
-//    
-//    res.redirect(url_token_endpoint);
 });
 
 app.get('/auth/token', (req, res, next) => {
