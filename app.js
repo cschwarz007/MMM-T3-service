@@ -68,8 +68,7 @@ app.get('/auth/callback', (req, res) => {
     
     options = {
         method: 'POST',
-        host: url_auth,
-        path: '/oauth2/v3/token',
+        host: url_auth + '/oauth2/v3/token',
         headers: { 'content-type': 'text/json' },
         body: JSON.stringify(paramsObj)
     };
