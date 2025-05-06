@@ -65,9 +65,11 @@ app.get('/auth/callback', (req, res) => {
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'audience': url_data
     }
+    req.headers = { 'content-type': 'text/plain' };
+    req.body = paramsObj;
     
-    const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_auth + '/oauth2/v3/token' + "?" + searchparams.toString().replace("\*","%2A"));
+    //const searchparams = new URLSearchParams(paramsObj);
+    res.redirect(url_auth + '/oauth2/v3/token'); // + "?" + searchparams.toString().replace("\*","%2A"));
 });                    
 
 //app.get('/',(req,res) => {
