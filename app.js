@@ -47,18 +47,20 @@ app.get('/auth', (req, res) => {
 
 app.get('/auth/callback', (req, res) => {
     callback_code=req.query.code.toString();
+    req.body = '';
+    res.body = '';
     
-    var urlencoded = new URLSearchParams();
-    urlencoded.append('grant_type', 'authorization_code');
-    urlencoded.append('client_id', process.env.CLIENT_ID);
-    urlencoded.append('client_secret', process.env.CLIENT_SECRET);
-    urlencoded.append('code', callback_code);
-    urlencoded.append('redirect_uri', 'https://' + 'mmm-t3-service.onrender.com' /*+ req.get('host')*/ + '/auth/token');
-    urlencoded.append('audience', url_data);
+    const paramsObj = {
+        'grant_type': 'authorization_code'),
+        'client_id': process.env.CLIENT_ID),
+        'client_secret': process.env.CLIENT_SECRET),
+        'code': callback_code),
+        'redirect_uri': 'https://' + req.get('host') + '/auth/token'),
+        'audience': url_data 
+    };
     
-    const searchparams = new URLSearchParams(urlencoded);
+    const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth + '/oauth2/v3/token' + "?" + searchparams.toString().replace("\*","%2A"));
-    
 });
 
 app.get('/auth/token', (req, res, next) => {
