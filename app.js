@@ -51,12 +51,12 @@ app.get('/auth/callback', (req, res) => {
     res.body = '';
     
     const paramsObj = {
-        'grant_type': 'authorization_code'),
-        'client_id': process.env.CLIENT_ID),
-        'client_secret': process.env.CLIENT_SECRET),
-        'code': callback_code),
-        'redirect_uri': 'https://' + req.get('host') + '/auth/token'),
-        'audience': url_data 
+        'grant_type': 'authorization_code',
+        'client_id': process.env.CLIENT_ID,
+        'client_secret': process.env.CLIENT_SECRET,
+        'code': callback_code,
+        'redirect_uri': 'https://' + req.get('host') + '/auth/token',
+        'audience': url_data
     };
     
     const searchparams = new URLSearchParams(paramsObj);
