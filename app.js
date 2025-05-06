@@ -69,7 +69,7 @@ app.get('/auth/callback', (req, res) => {
     options = {
         method: 'POST',
         headers: { 'content-type': 'text/json' },
-        body: JSON.stringify(paramsObj);
+        body: JSON.stringify(paramsObj)
     };
     
     const newreq = http.request(options, (res) => {
