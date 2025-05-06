@@ -65,8 +65,27 @@ app.get('/auth/callback', (req, res) => {
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'audience': url_data
     }
-    req.headers = { 'content-type': 'text/plain' };
-    req.body = paramsObj;
+    
+    options = {
+        method: 'POST',
+        headers: { 'content-type': 'text/json' },
+        body: JSON.stringify(paramsObj);
+    };
+    
+    const newreq = http.request(options, (res) => {
+        let data = '';
+
+        res.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        // Ending the response 
+        res.on('end', () => {
+            console.log('Body:', JSON.parse(data))
+        });
+    }).on("error", (err) => {
+        console.log("Error: ", err)
+    }).end()
     
     //const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth + '/oauth2/v3/token'); // + "?" + searchparams.toString().replace("\*","%2A"));
