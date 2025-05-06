@@ -72,7 +72,7 @@ app.get('/auth/callback', (req, res) => {
         body: JSON.stringify(paramsObj)
     };
     
-    const newreq = http.request(options, (res) => {
+    const newreq = https.request(options, (res) => {
         let data = '';
 
         res.on('data', (chunk) => {
