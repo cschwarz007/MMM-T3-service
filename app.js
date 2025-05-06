@@ -46,22 +46,23 @@ app.get('/auth', (req, res) => {
 })
 
 app.get('/auth/callback', (req, res) => {
-    callback_code=req.query.code.toString();
-    req.body = '';
-    res.body = '';
-    
+    if (req.query["code"]) {
+        callback_code=req.query.code.toString();
+    } else {
+        res.redirect('/auth/token');
+    }
     const paramsObj = {
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
-        'redirect_uri': 'https://' + req.get('host') + '/auth/token',
+        'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'audience': url_data
     };
     
     const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth + '/oauth2/v3/token' + "?" + searchparams.toString().replace("\*","%2A"));
-});
+});                    
 
 app.get('/auth/token', (req, res, next) => {
     
