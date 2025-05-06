@@ -39,7 +39,7 @@ app.get('/auth', (req, res) => {
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'response_type': 'code',
         'state': (Math.floor(Math.random() * 10))
-    };
+    }
   
     const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth + '/oauth2/v3/authorize' + "?" + searchparams.toString());
@@ -49,8 +49,14 @@ app.get('/auth/callback', (req, res) => {
     if (req.query["code"]) {
         callback_code=req.query.code.toString();
     } else {
-        res.redirect('/auth/token');
+        if (req.query["refresh_token"]) { refresh_token=req.query.refresh_token.toString() }
+        if (req.query["access_token"]) { access_token=req.query.access_token.toString() }
+        
+        res.send(req.body + "\n\n" + 
+             "refresh_token: " + refresh_token + "\n" + 
+             "access_token: " + access_token );
     }
+    
     const paramsObj = {
         'grant_type': 'authorization_code',
         'client_id': process.env.CLIENT_ID,
@@ -58,21 +64,11 @@ app.get('/auth/callback', (req, res) => {
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
         'audience': url_data
-    };
+    }
     
     const searchparams = new URLSearchParams(paramsObj);
     res.redirect(url_auth + '/oauth2/v3/token' + "?" + searchparams.toString().replace("\*","%2A"));
 });                    
-
-app.get('/auth/token', (req, res, next) => {
-    
-    refresh_token=req.query.refresh_token.toString() || next(err);
-    access_token=req.query.access_token.toString() || next(err);
-    
-    res.send(req.body + "\n\n" + 
-             "refresh_token: " + refresh_token + "\n" + 
-             "access_token: " + access_token );
-});
 
 //app.get('/',(req,res) => {
 //    res.send(html);
