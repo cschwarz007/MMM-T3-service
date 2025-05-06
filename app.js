@@ -68,6 +68,8 @@ app.get('/auth/callback', (req, res) => {
     
     options = {
         method: 'POST',
+        host: url_auth,
+        path: '/oauth2/v3/token',
         headers: { 'content-type': 'text/json' },
         body: JSON.stringify(paramsObj)
     };
@@ -88,7 +90,7 @@ app.get('/auth/callback', (req, res) => {
     }).end()
     
     //const searchparams = new URLSearchParams(paramsObj);
-    res.redirect(url_auth + '/oauth2/v3/token'); // + "?" + searchparams.toString().replace("\*","%2A"));
+    //res.redirect(url_auth + '/oauth2/v3/token'); // + "?" + searchparams.toString().replace("\*","%2A"));
 });                    
 
 //app.get('/',(req,res) => {
