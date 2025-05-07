@@ -73,6 +73,8 @@ app.get('/auth/callback', (req, res) => {
         'audience': 'https://' + urlData
     });
     
+    console.log(paramsObj.toString().replace("\*","%2A"));
+    
     const options = {
         method: 'POST',
         host: urlAuth,
