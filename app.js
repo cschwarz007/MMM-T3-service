@@ -73,9 +73,8 @@ app.get('/auth/callback', (req, res) => {
         'audience': 'https://' + urlData
     });
     
-    options = {
+    const options = {
         method: 'POST',
-        host: urlAuth,
         path: '/oauth2/v3/token',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         form: paramsObj.toString().replace("\*","%2A")
