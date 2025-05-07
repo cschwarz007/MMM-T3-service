@@ -73,21 +73,11 @@ app.get('/auth/callback', (req, res) => {
         'audience': 'https://' + urlData
     });
     
-    console.log(paramsObj);
-    
     const options = {
         method: 'POST',
         host: urlAuth,
         path: '/oauth2/v3/token',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        form: {
-            'grant_type': 'authorization_code',
-            'client_id': process.env.CLIENT_ID,
-            'client_secret': process.env.CLIENT_SECRET,
-            'code': callback_code,
-            'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
-            'audience': 'https://' + urlData
-        }
+        headers: { 'content-type': 'application/x-www-form-urlencoded' }
     };
     
     const newreq = https.request(options, (newres) => {
@@ -105,7 +95,8 @@ app.get('/auth/callback', (req, res) => {
         console.log("Error: ", err)
     }).end()
     
-    console.log(JSON.stringify(newreq)); //show what was sent
+    newreq.write(paramsObj.toString().replace("\*","%2A"));
+    newreq.end();
 });
 
 const server = app.listen(port, function() {
