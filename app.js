@@ -78,7 +78,7 @@ app.get('/auth/callback', (req, res) => {
         host: urlAuth,
         path: '/oauth2/v3/token',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        body: paramsObj.toString().replace("\*","%2A")
+        form: paramsObj.toString().replace("\*","%2A")
     };
     
     const newreq = https.request(options, (newres) => {
@@ -95,6 +95,8 @@ app.get('/auth/callback', (req, res) => {
     }).on("error", (err) => {
         console.log("Error: ", err)
     }).end()
+    
+    console.log(JSON.stringify(newreq)); //show what was sent
 });
 
 const server = app.listen(port, function() {
