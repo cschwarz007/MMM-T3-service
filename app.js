@@ -77,7 +77,8 @@ app.get('/auth/callback', (req, res) => {
         method: 'POST',
         host: urlAuth,
         path: '/oauth2/v3/token',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' }
+        headers: { 'content-type': 'application/x-www-form-urlencoded',
+                    'content-length': paramsObj.toString().replace("\*","%2A").length, }
     };
     
     const newreq = https.request(options, (newres) => {
