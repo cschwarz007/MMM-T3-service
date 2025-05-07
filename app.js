@@ -5,8 +5,8 @@ const port = process.env.PORT || 3001;
 const https = require("https");
 
 //Tesla specific
-const urlAuth = "https://fleet-auth.prd.vn.cloud.tesla.com";
-const urlData = "https://fleet-api.prd.na.vn.cloud.tesla.com";
+const urlAuth = "fleet-auth.prd.vn.cloud.tesla.com";
+const urlData = "fleet-api.prd.na.vn.cloud.tesla.com";
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
@@ -49,7 +49,7 @@ app.get('/auth', (req, res) => {
         'state': (Math.floor(Math.random() * 10))
     });
   
-    res.redirect(urlAuth + '/oauth2/v3/authorize' + "?" + paramsObj.toString());
+    res.redirect('https://' + urlAuth + '/oauth2/v3/authorize' + "?" + paramsObj.toString());
 })
 
 app.get('/auth/callback', (req, res) => {
@@ -70,7 +70,7 @@ app.get('/auth/callback', (req, res) => {
         'client_secret': process.env.CLIENT_SECRET,
         'code': callback_code,
         'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
-        'audience': urlData
+        'audience': 'https://' + urlData
     });
     
     options = {
