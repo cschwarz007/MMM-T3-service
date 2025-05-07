@@ -80,7 +80,14 @@ app.get('/auth/callback', (req, res) => {
         host: urlAuth,
         path: '/oauth2/v3/token',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        body: paramsObj
+        form: {
+            'grant_type': 'authorization_code',
+            'client_id': process.env.CLIENT_ID,
+            'client_secret': process.env.CLIENT_SECRET,
+            'code': callback_code,
+            'redirect_uri': 'https://' + req.get('host') + '/auth/callback',
+            'audience': 'https://' + urlData
+        }
     };
     
     const newreq = https.request(options, (newres) => {
