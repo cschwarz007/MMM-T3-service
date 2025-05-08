@@ -20,9 +20,7 @@ References:
   * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: Use the following in your app inputs:
     * Name: You will need a unique \<name\> that doesn't contain "Tesla". This should match your render app name from earlier.
     * Allowed Origin(s): \<name\>.onrender.com
-    * Allowed Redirect URI(s): 
-      * \<name\>.onrender.com/auth/callback
-      * \<name\>.onrender.com/auth/token
+    * Allowed Redirect URI(s): \<name\>.onrender.com/auth/callback
     * Allowed Returned URL(s): \<name\>.onrender.com
     * Client credentials: client-credentials, authorization-code
     * Scopes: vehicle info, location, commands, charging
