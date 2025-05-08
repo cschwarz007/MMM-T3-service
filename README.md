@@ -14,12 +14,12 @@ This is the MMM-T3 web service for getting and updating refresh tokens for use w
    * Choose instance type: Recommend the free one. You will only need this to register app and refresh tokens. MMM-Tesla3 does not directly utilize the web service.
    * Add environment variables: will return to these in a moment
      * CLIENT_SECRET: from Tesla Dev dashboard
-     * CLIENT_ID: from Tesla Dev dashboard\
+     * CLIENT_ID: from Tesla Dev dashboard
      * PASSWORD: make up a sufficiently complex password so other users cant charge their activity to your app (i.e. your client_secret/id) 
 
 3. Create your Tesla Fleet API app using their [getting started directions here](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api), noting the following:
   * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: Use the following in your app inputs:
-    * Name: You will need a unique \<name\> that doesn't contain "Tesla". This should match your render app name from earlier.
+    * Name: This should match your render app name from earlier.
     * Allowed Origin(s): \<name\>.onrender.com
     * Allowed Redirect URI(s): \<name\>.onrender.com/auth/callback
     * Allowed Returned URL(s): \<name\>.onrender.com
