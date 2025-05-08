@@ -34,10 +34,9 @@ References:
   * **[Tesla Getting Started Step 4](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: use the links in the directions:
     * PARTNER auth token link: run curl using their example (heavy editting) in the command line. They will respond in the terminal with your registration auth token which will be used next.
     * REGISTER endpoint step: run one of the multiple linked options. From what I can tell, you dont need the response from this.
-<br>
-Finally we are at:
-** Why you need my app ** aka, authorizing your app to do stuff for you, aka being your own customer. See [Tesla API Third Party tokens](https://developer.tesla.com/docs/fleet-api/authentication/third-party-tokens) for what my app is mimicking.
-<br>
+
+Finally we are at: **Why you need my app** aka, authorizing your app to do stuff for you, aka being your own customer. See [Tesla API Third Party tokens](https://developer.tesla.com/docs/fleet-api/authentication/third-party-tokens) for what my app is mimicking.
+
 4. Goto \<name\>.onrender.com/auth?password=\<your PASSWORD from earlier here\>
     * MMM-T3-service will redirect you to login to tesla and give your app permissions. You should see all your own Tesla app stuff (not mine).
     * Tesla should redirect back to \<name\>.onrender.com/auth/callback.
