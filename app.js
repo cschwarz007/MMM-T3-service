@@ -94,7 +94,7 @@ app.get('/auth/callback', (req, res) => {
         });
     }).on("error", (err) => {
         console.log("Error: ", err)
-    }).end()
+    });
     
     newreq.write(paramsObj.toString().replace("\*","%2A"));
     newreq.end();
