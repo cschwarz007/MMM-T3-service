@@ -1,13 +1,13 @@
 # README
 
-This is the MMM-Tesla 3 web service for use with Tesla Fleet API and MMM-Tesla 3 module. This was forked from the [Express](https://expressjs.com) [Hello world](https://expressjs.com/en/starter/hello-world.html) example on [Render](https://render.com). This app can be deployed on a free-tier web service at [https://render.com](https://render.com).
+This is the MMM-T3 web service for getting and updating refresh tokens for use with your Tesla Fleet API app and [MMM-Tesla3](https://github.com/usncahill/MMM-Tesla3) module. This was forked from the [Express](https://expressjs.com) [Hello world](https://expressjs.com/en/starter/hello-world.html) example on [Render](https://render.com). This app can be deployed on a free-tier web service at [https://render.com](https://render.com).
+
+## References
+* [Deploying a Node Express app (render.com docs)](https://render.com/docs/deploy-node-express-app)
+* [Tesla Developer](https://developer.tesla.com/)
+* [Tesla Fleet API Getting Started](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)
 
 ## Deployment
-References: 
-[Deploying a Node Express app (render.com docs)](https://render.com/docs/deploy-node-express-app)
-[Tesla Developer](https://developer.tesla.com/)
-[Tesla Fleet API Getting Started](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)
-
 1. Fork this repo.
 2. Get a free web service account. The following directions will be based on replicating my work on render.com. [Render account and web service setup](https://render.com/docs/your-first-deploy). Consider the following during setup:
    * Name your service: omit "Tesla" from the name. the name will be part of your URL and Tesla does not allow app names or URLs that contain Tesla in the name. You can name your render web app anything as long as the name is available and can recreate the web service in only a few clicks, so don't worry about this, you can delete the service and remake with new name later.
