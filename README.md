@@ -37,7 +37,7 @@ References:
 <br>
 Finally we are at:
 ** Why you need my app ** aka, authorizing your app to do stuff for you, aka being your own customer. See [Tesla API Third Party tokens](https://developer.tesla.com/docs/fleet-api/authentication/third-party-tokens) for what my app is mimicking.
-
+<br>
 4. Goto \<name\>.onrender.com/auth?password=\<your PASSWORD from earlier here\>
     * MMM-T3-service will redirect you to login to tesla and give your app permissions. You should see all your own Tesla app stuff (not mine).
     * Tesla should redirect back to \<name\>.onrender.com/auth/callback.
