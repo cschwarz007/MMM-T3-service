@@ -40,6 +40,6 @@ Finally we are at: **Why you need my app** aka, authorizing your app to do stuff
 4. Goto \<name\>.onrender.com/auth?password=\<your PASSWORD from earlier here\>
     * MMM-T3-service will redirect you to login to Tesla and give your app permissions. You should see all your own Tesla app stuff (not mine).
     * Tesla should redirect back to \<name\>.onrender.com/auth/callback.
-    * MMM-T3-service should redirect back to Tesla's refresh token path.
-    * Tesla should redirect back to \<name\>.onrender.com/auth/token
-    * MMM-T3-service will spit out a page with the token info you need for MMM-Tesla3. Copy all the token text including the brackets (e.g. {token things here, copy us and the brackets}) and paste to the token.json per the MMM-Tesla3 directions.
+    * MMM-T3-service should post the returned code to Tesla's refresh token path.
+    * Tesla should respond to the post with a token json.
+    * MMM-T3-service will spit out a page with the token json comtent. If using this for MMM-Tesla3, copy all the token text including the brackets (e.g. {token things here, copy us and the brackets}) and paste to the token.json per the MMM-Tesla3 directions.
