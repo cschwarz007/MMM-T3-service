@@ -83,11 +83,10 @@ app.get('/auth/callback', (req, res) => {
 
         // Ending the response 
         newres.on('end', () => {
-            
-            console.log('acget1');
-            
-            res.send('<h1>MMM-Tesla3</h1><br><p>Insert into token.json in base directory.</p><br><br>' + data);
-            console.log('Body:', JSON.parse(data))
+            console.log('Successful response from Tesla.');
+            res.send('<h1>MMM-Tesla3</h1>' +
+                     '<br><p>Paste (overwrite) token.json in base directory with the following.</p><br><br>' +
+                     '<div style="inline-size: 100%; overflow-wrap: break-word;">' + data + '<br><br></div>');
         });
     }).on("error", (err) => {
         console.log("Error: ", err)
