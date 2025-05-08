@@ -8,6 +8,8 @@ const https = require("https");
 const urlAuth = "fleet-auth.prd.vn.cloud.tesla.com";
 const urlData = "fleet-api.prd.na.vn.cloud.tesla.com";
 
+app.use(express.json());
+
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
         root: "./",
@@ -52,17 +54,20 @@ app.get('/auth', (req, res) => {
     res.redirect('https://' + urlAuth + '/oauth2/v3/authorize' + "?" + paramsObj.toString());
 })
 
+app.post('/auth/callback', (req, res) => {
+    console.log('acpost1');
+    if (!req.body.client_id) { return };
+    console.log('acpost2');
+    if (req.body.client_id !== process.env.CLIENT_ID) { return };
+    console.log('acpost3');
+    
+    res.send('<h1>MMM-Tesla3</h1><br><p>Insert into token.json in base directory.</p><br><br>' + JSON.parse(data));
+});
+
 app.get('/auth/callback', (req, res) => {
-    if (req.query["code"]) {
-        callback_code=req.query.code.toString();
-    } else {
-        if (req.query["refresh_token"]) { refresh_token=req.query.refresh_token.toString() }
-        if (req.query["access_token"]) { access_token=req.query.access_token.toString() }
-        
-        res.send(JSON.stringify(req) + "\n\n" + 
-             "refresh_token: " + refresh_token + "\n" + 
-             "access_token: " + access_token );
-    }
+    if (!req.query["code"]) { return; }
+    
+    callback_code=req.query.code.toString();
     
     const paramsObj = new URLSearchParams({
         'grant_type': 'authorization_code',
@@ -90,6 +95,9 @@ app.get('/auth/callback', (req, res) => {
 
         // Ending the response 
         newres.on('end', () => {
+            
+            console.log('acget1');
+            res.send('acget1' + JSON.parse(data));
             console.log('Body:', JSON.parse(data))
         });
     }).on("error", (err) => {
