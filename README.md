@@ -43,3 +43,8 @@ Finally we are at: **Why you need my app** aka, authorizing your app to do stuff
     * MMM-T3-service should post the returned code to Tesla's refresh token path.
     * Tesla should respond to the post with a token json.
     * MMM-T3-service will spit out a page with the token json content. If using this for MMM-Tesla3, copy all the token text including the brackets (e.g. {token things here, copy us and the brackets}) and paste to the token.json per the MMM-Tesla3 directions.
+
+## Future
+Things I'm thinking about adding/changing
+    * Add automation for the PARTNER and REGISTER steps. Though, this is a one time thing, not everyone wants to use curl or whatever.
+    * Add page fields and buttons instead of relying on variables and query params. 
