@@ -15,7 +15,7 @@ This is the MMM-T3 web service for getting and updating refresh tokens for use w
    * Add environment variables: will return to these in a moment
      * CLIENT_SECRET: from Tesla Dev dashboard
      * CLIENT_ID: from Tesla Dev dashboard
-     * PASSWORD: make up a sufficiently complex password so other users cant charge their activity to your app (i.e. your client_secret/id) 
+     * PASSWORD: make up a sufficiently complex password so other users cant charge their activity to your app (i.e. your client_secret/id). on render.com, the field offers to auto-populate a long suitable string. use that and copy it for later.
 
 3. Create your Tesla Fleet API app using their [getting started directions here](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api), noting the following:
   * **[Tesla Getting Started Step 2](https://developer.tesla.com/docs/fleet-api/getting-started/what-is-fleet-api)**: Use the following in your app inputs:
