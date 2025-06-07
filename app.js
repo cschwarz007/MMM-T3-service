@@ -6,7 +6,7 @@ const https = require("https");
 
 //Tesla specific
 const urlAuth = "fleet-auth.prd.vn.cloud.tesla.com";
-const urlData = "fleet-api.prd.na.vn.cloud.tesla.com";
+const urlData = "fleet-api.prd.eu.vn.cloud.tesla.com";
 
 app.get('/.well-known/appspecific/:name', (req, res, next) => {
     const options = {
